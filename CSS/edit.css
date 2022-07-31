@@ -1,0 +1,10 @@
+
+
+.edit-container{
+    display: flex;
+    justify-content: center;
+}
+
+.edit-container > form{
+    display: flex;
+}

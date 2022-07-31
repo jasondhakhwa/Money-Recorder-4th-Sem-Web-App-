@@ -1,0 +1,52 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    background-color: rgb(235, 235, 235);
+}
+
+.navbar-container {
+    background-color: #ff7171;
+    display: flex;
+    justify-content: center;
+}
+
+.navbar-contains {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1140px;
+}
+
+.navbar-contains>div {
+    display: flex;
+    gap: 20px;
+}
+
+
+/* transaction page */
+.transaction-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.transaction-blocks-container{
+    display: flex;
+    gap: 20px;
+}
+
+.transaction-contains {
+    background-color: white;
+    border-radius: 5px;
+    /* width: 500px; */
+    
+}
+
+table{
+    border-collapse: separate;
+    border-spacing: 10px;
+    padding: 10px;
+}
