@@ -1,9 +1,11 @@
 * {
     box-sizing: border-box;
+    text-decoration: none;
 }
 
 html {
     background-color: rgb(235, 235, 235);
+    padding: 0px;
 }
 
 .navbar-container {
@@ -19,6 +21,7 @@ html {
     width: 1140px;
 }
 
+
 .navbar-contains>div {
     display: flex;
     gap: 20px;
@@ -33,7 +36,7 @@ html {
     flex-direction: column;
 }
 
-.transaction-blocks-container{
+.transaction-blocks-container {
     display: flex;
     gap: 20px;
 }
@@ -42,10 +45,9 @@ html {
     background-color: white;
     border-radius: 5px;
     /* width: 500px; */
-    
 }
 
-table{
+table {
     border-collapse: separate;
     border-spacing: 10px;
     padding: 10px;
