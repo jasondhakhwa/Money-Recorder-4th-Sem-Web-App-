@@ -8,21 +8,9 @@
     <link rel="stylesheet" href="./CSS/index.css" />
   </head>
   <body>
-    <!-- Navbar Content -->
-    <div class="navbar-container">
-      <div class="navbar-contains">
-        <p>Logo</p>
-        <div>
-          <a href="transaction.html">Transaction</a>
-          <a href="accounts.html">Accounts</a>
-          <a href="budget.html">Budget</a>
-        </div>
-        <div>
-          <a href="login.html">Login</a>
-          <!-- <a href="register.html">Register</a> -->
-        </div>
-      </div>
-    </div>
+    <?php
+        include('./includes/navbar.php')
+    ?>
 
     <!-- Edit Content -->
     <div class="edit-container">
@@ -32,9 +20,19 @@
           <table>
             <tr>
               <td>
-                <input type="radio" name="transaction-type" value="Income" id="input-type-income"/>
+                <input
+                  type="radio"
+                  name="transaction-type"
+                  value="Income"
+                  id="input-type-income"
+                />
                 <label for="input-type-income">Income</label>
-                <input type="radio" name="transaction-type" value="Expenses"  id="input-type-expenses"/>
+                <input
+                  type="radio"
+                  name="transaction-type"
+                  value="Expenses"
+                  id="input-type-expenses"
+                />
                 <label for="input-type-expenses">Expenses</label>
               </td>
             </tr>

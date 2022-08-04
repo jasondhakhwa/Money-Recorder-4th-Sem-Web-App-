@@ -1,4 +1,4 @@
-.add-transaction {
+.add-transaction-button {
     position: fixed;
     bottom: 50px;
     right: 50px;
@@ -9,16 +9,65 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.add-transaction:hover{
-    cursor: pointer;
-}
-
-.add-transaction-button {
     text-decoration: none;
     color: inherit;
     font-weight: bold;
     font-size: larger;
     color: white;
+}
+
+.add-transaction:hover {
+    cursor: pointer;
+}
+
+.action-buttons {
+    height: 25px;
+    width: 25px;
+}
+
+.transaction-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.transaction-row>* {
+    width: 100px;
+    display: inline-block;
+    /* or block */
+    text-align: center;
+}
+
+.transaction-head {
+    background-color: #ff7171;
+    padding: 10px;
+    color: white;
+}
+
+
+.transaction-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.transaction-blocks-container {
+    display: flex;
+    gap: 20px;
+}
+
+.transaction-contains {
+    background-color: white;
+    border-radius: 5px;
+    /* width: 500px; */
+}
+
+/* transaction page */
+
+table {
+    border-collapse: separate;
+    border-spacing: 10px;
+    padding: 10px;
 }
