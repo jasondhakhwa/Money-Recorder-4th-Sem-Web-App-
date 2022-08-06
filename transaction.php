@@ -1,105 +1,101 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php include('./includes/navbar.php'); ?>
+<?php
+if (!isset($_SESSION['user'])) {
+  die("<h1>Please <a href='login.php'>Login</a></h1>");
+}
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Money Manager</title>
-  <link rel="stylesheet" href="./CSS/index.css" />
-  <link rel="stylesheet" href="./CSS/transaction.css" />
-  <link rel="stylesheet" href="./CSS/edit.css" />
-</head>
+$connection = mysqli_connect("localhost", "root", "", "money_manager");
+if (!$connection) {
+  die("Connection failed..." . mysqli_connect_error());
+}
+$username = $_SESSION['user']['username'];
+$query = "select * from transactions 
+  where user= '$username' ";
+$result = mysqli_query($connection, $query);
 
-<body>
-  <!-- Add button popup -->
-  <script>
-    function openForm() {
-      document.getElementById("myForm").style.display = "block";
+if (!$result) {
+  die("Query failed..." . mysqli_error($connection));
+};
+
+
+if (isset($_GET['action'])) {
+  if ($_GET['action'] == "delete") {
+    $connection = mysqli_connect("localhost", "root", "", "money_manager");
+    if (!$connection) {
+      die(mysqli_connect_error());
     }
+    $query = "delete from transactions where id=$_GET[id]";
+    $result = mysqli_query($connection, $query);
 
-    function closeForm() {
-      document.getElementById("myForm").style.display = "none";
+    if (!$result) {
+      die(mysqli_error($connection));
     }
-  </script>
+  }
+  header("Location: http://localhost/College/Web%20App/MoneyManager/transaction.php");
+}
+?>
 
-  <!-- Navbar Content -->
-  <div class="navbar-container">
-    <div class="navbar-contains">
-      <p>Logo</p>
-      <div>
-        <a href="transaction.html">Transaction</a>
-        <a href="accounts.html">Accounts</a>
-        <a href="budget.html">Budget</a>
+<!-- Page Content -->
+<div class="transaction-content">
+  <h2>Transaction</h2>
+  <div class="transaction-blocks-container">
+    <div class="transaction-contains">
+      <div class="transaction-row transaction-head">
+        <span>Type</span>
+        <span>Account</span>
+        <span>Category</span>
+        <span>Amount</span>
+        <span>Actions</span>
       </div>
-      <div>
-        <a href="login.php">Login</a>
-        <!-- <a href="register.html">Register</a> -->
-      </div>
+
+      <?php
+      $income = 0;
+      $expense = 0;
+      while ($row = mysqli_fetch_assoc($result)) {
+        if ($row['type'] == 'income') {
+          $income += $row['amount'];
+        } else {
+          $expense += $row['amount'];
+        }
+        echo "
+            <div class='transaction-row'>
+              <span>$row[type]</span>
+              <span>$row[account]</span>
+              <span>$row[category]</span>
+              <span>$row[amount]</span>
+              <div>
+                <a href='edit.php?action=update&id=$row[id]'>
+                  <img class='action-buttons' src='edit.svg' />
+                </a>
+                <a href='$_SERVER[PHP_SELF]?action=delete&id=$row[id]'>
+                  <img class='action-buttons' src='delete.svg' />
+                </a>
+              </div>
+            </div>
+          ";
+      }
+      ?>
+    </div>
+
+    <div class="transaction-contains">
+      <table class="transaction-summary-table">
+        <tr>
+          <td>Income</td>
+          <td><?php echo $income ?></td>
+        </tr>
+        <tr>
+          <td>Expenses</td>
+          <td><?php echo $expense ?></td>
+        </tr>
+        <tr>
+          <td>Total</td>
+          <td><?php echo ($income - $expense) ?></td>
+        </tr>
+      </table>
     </div>
   </div>
-
-  <!-- Page Content -->
-  <div class="transaction-content">
-    <h2>Transaction</h2>
-    <div class="transaction-blocks-container">
-      <div class="transaction-contains">
-        <div class="transaction-row transaction-head">
-          <span>Date</span>
-          <span>Type</span>
-          <span>Account</span>
-          <span>Category</span>
-          <span>Amount</span>
-          <span>Actions</span>
-        </div>
-
-        <div class="transaction-row">
-          <span>2017</span>
-          <span>Expense</span>
-          <span>Cash</span>
-          <span>Food</span>
-          <span>1000</span>
-          <div>
-            <a href="edit.html">
-              <img class="action-buttons" src="edit.svg" />
-            </a>
-            <a href="edit.html">
-              <img class="action-buttons" src="delete.svg" />
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="transaction-contains">
-        <table class="transaction-summary-table">
-          <tr>
-            <td>Income</td>
-            <td>1200</td>
-          </tr>
-          <tr>
-            <td>Expenses</td>
-            <td>1200</td>
-          </tr>
-          <tr>
-            <td>Total</td>
-            <td>1200</td>
-          </tr>
-        </table>
-      </div>
-    </div>
-    <a class="add-transaction-button" id="add-transaction" href="add.php">+</a>
-  </div>
-
-  <!--   -->
-  <script>
-    function openForm() {
-      document.getElementById("add-transaction").style.display = "block";
-    }
-
-    function closeForm() {
-      document.getElementById("myForm").style.display = "none";
-    }
-  </script>
-
+  <a class="add-transaction-button" id="add-transaction" href="add.php">+</a>
+</div>
 
 </body>
 

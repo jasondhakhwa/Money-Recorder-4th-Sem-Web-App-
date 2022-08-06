@@ -1,63 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./CSS/index.css" />
-</head>
+<?php include('./includes/navbar.php'); ?>
 
 <?php
-
 function saveUser()
 {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
 
     $connection = mysqli_connect("localhost", "root", "", "money_manager");
     if (!$connection) {
         die("Cannot connect to the database server" . mysqli_connect_error());
     }
 
-    $query = "insert into users(username, password)
-    values('$_POST[username]', '$_POST[password]')";
-    mysqli_query($connection, $query);
+    $query = "select * from users where username='$username' and password='$password'";
+    $result = mysqli_query($connection, $query);
 
-    if (!$query) {
+    if (!$result) {
         die("Query error: " . mysqli_error($connection));
     }
-
+    if (!mysqli_num_rows($result)) {
+        echo "<h2>Invalid Login Credentials</h2>";
+        showForm();
+    } else {
+        $_SESSION['user'] = mysqli_fetch_assoc($result);
+        header("Location: http://localhost/College/Web%20App/MoneyManager/transaction.php");
+    }
     mysqli_close($connection);
-    echo "<h2>Data Inserted Successfully</h2>";
+}
+if (isset($_GET['action'])) {
+    if ($_GET['action'] == 'logout') {
+        unset($_SESSION['user']);
+        header("Location: http://localhost/College/Web%20App/MoneyManager/login.php");
+    }
+}
+
+if (isset($_POST['__CHECK__'])) {
+    saveUser();
+} else {
     showForm();
 }
-?>
 
-<body>
-    <!-- Navbar Content -->
-    <div class="navbar-container">
-        <div class="navbar-contains">
-            <p>Logo</p>
-            <div>
-                <a href="transaction.html">Transaction</a>
-                <a href="accounts.html">Accounts</a>
-                <a href="budget.html">Budget</a>
-            </div>
-            <div>
-                <a href="login.php">Login</a>
-            </div>
-        </div>
-    </div>
-    <?php
-
-    if (isset($_POST['__CHECK__'])) {
-        saveUser();
-    } else {
-        showForm();
-    }
-
-    function showForm()
-    {
-        echo <<<__LOGIN__
+function showForm()
+{
+    echo <<<__LOGIN__
         <!-- Login Container -->
         <div class="login-container">
             <h2>Login</h2>
@@ -84,9 +68,9 @@ function saveUser()
             </div>
         </div> 
 __LOGIN__;
-    }
+}
 
-    ?>
+?>
 </body>
 
 </html>
