@@ -65,10 +65,10 @@ if (isset($_GET['action'])) {
               <span>$row[amount]</span>
               <div>
                 <a href='edit.php?action=update&id=$row[id]'>
-                  <img class='action-buttons' src='edit.svg' />
+                  <img class='action-buttons' src='./images/actions/edit.svg' />
                 </a>
                 <a href='$_SERVER[PHP_SELF]?action=delete&id=$row[id]'>
-                  <img class='action-buttons' src='delete.svg' />
+                  <img class='action-buttons' src='./images/actions/delete.svg' />
                 </a>
               </div>
             </div>
