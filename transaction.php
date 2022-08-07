@@ -52,7 +52,7 @@ if (isset($_GET['action'])) {
       $income = 0;
       $expense = 0;
       while ($row = mysqli_fetch_assoc($result)) {
-        if ($row['type'] == 'income') {
+        if ($row['type'] == 'Income') {
           $income += $row['amount'];
         } else {
           $expense += $row['amount'];

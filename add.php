@@ -32,7 +32,7 @@ function saveData()
 
 function showForm()
 {
-    $user=$_SESSION['user']['username'];
+    $user = $_SESSION['user']['username'];
     echo <<<___ADD_TRANSACTION__
 <div class="edit-container">
     <div class="edit-content">
@@ -75,11 +75,7 @@ function showForm()
                 </tr>
                 <tr>
                     <td>Amount: </td>
-                    <td><input placeholder="Amout" name="amount" /></td>
-                </tr>
-                <tr>
-                    <td>Note: </td>
-                    <td><input placeholder="Amout" name="note" /></td>
+                    <td><input placeholder="Amout" name="amount" type='number'/></td>
                 </tr>
                 <input type="hidden" value="1" name='__CHECK__' />
                 <input type="hidden" value="$user" name='user' />
@@ -91,7 +87,7 @@ function showForm()
             </table>
         </form>
     </div>
-    </div>
+</div>
 ___ADD_TRANSACTION__;
 }
 ?>

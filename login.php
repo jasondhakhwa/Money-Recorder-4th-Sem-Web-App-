@@ -33,6 +33,13 @@ if (isset($_GET['action'])) {
     }
 }
 
+
+function sanitizeDatas()
+{
+    $_POST['username'] = htmlentities($_POST['username']);
+    $_POST['password'] = htmlentities($_POST['password']);
+}
+
 if (isset($_POST['__CHECK__'])) {
     saveUser();
 } else {
@@ -43,6 +50,7 @@ function showForm()
 {
     echo <<<__LOGIN__
         <!-- Login Container -->
+        <div class='login-contains'>
         <div class="login-container">
             <h2>Login</h2>
             <form action="$_SERVER[PHP_SELF]" method="POST">
@@ -53,7 +61,7 @@ function showForm()
                     </tr>
                     <tr>
                         <td>Password:</td>
-                        <td><input placeholder="Password" name='password'/></td>
+                        <td><input placeholder="Password" name='password' type='password'/></td>
                     </tr>
                     <input type="hidden" value="1" name='__CHECK__' />
                     <tr>
@@ -64,9 +72,13 @@ function showForm()
                 </table>
             </form>
             <div>
-                <p>Don't have an account? <a href="register.php">Register</a></p>
+                <p>Don't have an account? <a href="register.php"  class='log-button'>Register</a></p>
             </div>
         </div> 
+        <div>
+        <img src='./images/undraw/login.svg' class='welcome-image'/>
+        </div>
+        </div>
 __LOGIN__;
 }
 

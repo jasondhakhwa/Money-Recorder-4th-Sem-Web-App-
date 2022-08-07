@@ -15,7 +15,7 @@ if (isset($_GET['action'])) {
     }
 
     $info = mysqli_fetch_assoc($result);
-  } 
+  }
 }
 
 if (isset($_POST['__CHECK__'])) {
@@ -28,6 +28,7 @@ if (isset($_POST['__CHECK__'])) {
       set 
           account='$_POST[account]' ,
           category='$_POST[category]' ,
+          type='$_POST[type]' ,
           amount='$_POST[amount]'
       where id=$_POST[id]
   ";
@@ -52,9 +53,9 @@ echo <<<__EDIT__
         <tr>
           <td>Type:</td>
           <td>
-            <input type="radio" name="transaction-type" value="Income" id="input-type-income" />
+            <input type="radio" name="type" value="Income"  id="input-type-income" />
             <label for="input-type-income">Income</label>
-            <input type="radio" name="transaction-type" value="Expenses" id="input-type-expenses" />
+            <input type="radio" name="type" value="Expense" id="input-type-expenses" />
             <label for="input-type-expenses">Expenses</label>
           </td>
         </tr>
@@ -68,7 +69,7 @@ echo <<<__EDIT__
         </tr>
         <tr>
           <td>Amount:</td>
-          <td><input placeholder="Amount"  value='$info[amount]' name='amount'/></td>
+          <td><input placeholder="Amount"  value='$info[amount]' name='amount' type='number'/></td>
         </tr>
         <input type="hidden" value="1" name='__CHECK__' />
         <input type="hidden" value="$info[id]" name='id' />

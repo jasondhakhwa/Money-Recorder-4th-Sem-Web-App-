@@ -1,0 +1,25 @@
+.login-contains{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+    gap: 100px;
+}
+
+.welcome-image{
+    width: 500px;
+}
+
+.login-container{
+    background-color: white;
+    padding: 50px;
+    border: .5px solid rgba(228, 228, 228, 0.52);
+    border-radius: 8px;
+}
+
+.log-button{
+    background-color: #5b6ff4 ;
+    padding: 10px;
+    color: white;
+    border-radius: 10px;
+}
